@@ -1,0 +1,17 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Design Portfolio Template</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+<body>
+
+<h2>External Paths</h2>
+
+<p>This example links to a page located in the html folder on the current web site:</p>
+
+<p><a href="">default</a></p>
+
+</body>
+</html>
