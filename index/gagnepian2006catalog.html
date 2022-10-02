@@ -6,8 +6,8 @@
 
 <body>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.js"></script>
-      <script src="GLTFLoader.js"></script>
-      <script src="OrbitControls.js"></script>
+      <script src="https://github.com/mrdoob/three.js/blob/d081c5a3501d272d19375fab1b01fedf9df29b22/examples/js/loaders/GLTFLoader.js"></script>
+      <script src="https://github.com/mrdoob/three.js/blob/d081c5a3501d272d19375fab1b01fedf9df29b22/examples/js/controls/OrbitControls.js"></script>
       <script>
       let scene, camera, renderer;
 
@@ -50,7 +50,7 @@
         document.body.appendChild(renderer.domElement);
 
         let loader = new THREE.GLTFLoader();
-        loader.load('Gagnepian_2006_Catalog.gltf', function(gltf){
+        loader.load('https://github.com/Jane2210/selenes-compass/blob/91b712fc03afa748508ff5d772836fe4906631fe/index/Gagnepian_2006_Catalog.gltf', function(gltf){
           car = gltf.scene.children[0];
           car.scale.set(0.5,0.5,0.5);
           scene.add(gltf.scene);
