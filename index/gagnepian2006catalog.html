@@ -19,7 +19,7 @@
 
        ## Latitudinal, Longitudinal Data
 
-       df = pd.read_csv("gagnepian_2006_catalog.csv")
+       df = pd.read_csv("selenes-compass/index/gagnepian_2006_catalog.csv")
 
        geometry = [Point(xy) for xy in zip(df['Long'], df['Lat'])]
        gdf = GeoDataFrame(df, geometry=geometry)   
