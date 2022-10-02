@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset=UTF-8 />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-  </head>
-  <body>
-    <script src="three.min.js"></script>
-    <script src="GLTFLoader.js"></script>
-    <script src="OrbitControls.js"></script>
-    <script>
+<head>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src ="https://pyscript.net/alpha/pyscript.js"></script
+  
+</head>
+
+<body>
+      <script src="three.min.js"></script>
+      <script src="GLTFLoader.js"></script>
+      <script src="OrbitControls.js"></script>
+      <script>
       let scene, camera, renderer;
 
       function init() {
@@ -63,5 +63,32 @@
       }
       init();
     </script>
-  </body>
-</html>
+  
+<py-script>
+      
+      import sys; sys.path
+      import pandas as pd 
+      from shapely.geometry import Point
+      import geopandas as gpd
+      from geopandas import GeoDataFrame
+      import matplotlib.pyplot as plt
+      import plotly.express as px
+      import cv2
+      import numpy as np
+      
+      url = 'https://github.com/Jane2210/selenes-compass/blob/main/index/nakamura_1979_sm_locations.csv?raw=true'
+      
+      df = pd.read_csv(url, index_col=0)
+      df
+
+      geometry = [Point(xy) for xy in zip(df['Long'], df['Lat'])]
+      gdf = GeoDataFrame(df, geometry=geometry)   
+    
+      world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+
+      gdf.plot(marker='o', color='blue', markersize=50, ax=world.boundary.plot(figsize=(15, 15), edgecolor='white'));
+      
+</py-script>
+
+</body>
