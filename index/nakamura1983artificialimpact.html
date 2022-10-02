@@ -1,1 +1,94 @@
+<head>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src ="https://pyscript.net/alpha/pyscript.js"></script
+  
+</head>
 
+<body>
+      <script src="three.min.js"></script>
+      <script src="GLTFLoader.js"></script>
+      <script src="OrbitControls.js"></script>
+      <script>
+      let scene, camera, renderer;
+
+      function init() {
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xdddddd);
+
+        camera = new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,1,5000);
+        camera.rotation.y = 45/180*Math.PI;
+        camera.position.x = 800;
+        camera.position.y = 100;
+        camera.position.z = 1000;
+
+        controls = new THREE.OrbitControls(camera);
+        controls.addEventListener('change', renderer);
+
+        hlight = new THREE.AmbientLight (0x404040,100);
+        scene.add(hlight);
+
+        directionalLight = new THREE.DirectionalLight(0xffffff,100);
+        directionalLight.position.set(0,1,0);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+        light = new THREE.PointLight(0xc4c4c4,10);
+        light.position.set(0,300,500);
+        scene.add(light);
+        light2 = new THREE.PointLight(0xc4c4c4,10);
+        light2.position.set(500,100,0);
+        scene.add(light2);
+        light3 = new THREE.PointLight(0xc4c4c4,10);
+        light3.position.set(0,100,-500);
+        scene.add(light3);
+        light4 = new THREE.PointLight(0xc4c4c4,10);
+        light4.position.set(-500,300,500);
+        scene.add(light4);
+
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        let loader = new THREE.GLTFLoader();
+        loader.load('Nakamura_1983_AI_Locations.gltf', function(gltf){
+          car = gltf.scene.children[0];
+          car.scale.set(0.5,0.5,0.5);
+          scene.add(gltf.scene);
+          animate();
+        });
+      }
+      function animate() {
+        renderer.render(scene,camera);
+        requestAnimationFrame(animate);
+      }
+      init();
+    </script>
+  
+<py-script>
+      
+      import sys; sys.path
+      import pandas as pd 
+      from shapely.geometry import Point
+      import geopandas as gpd
+      from geopandas import GeoDataFrame
+      import matplotlib.pyplot as plt
+      import plotly.express as px
+      import cv2
+      import numpy as np
+      
+      url = 'https://github.com/Jane2210/selenes-compass/blob/main/index/nakamura_1983_ai_arrivals.csv?raw=true'
+      
+      df = pd.read_csv(url, index_col=0)
+      df
+
+      geometry = [Point(xy) for xy in zip(df['Long'], df['Lat'])]
+      gdf = GeoDataFrame(df, geometry=geometry)   
+    
+      world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+
+      gdf.plot(marker='o', color='blue', markersize=50, ax=world.boundary.plot(figsize=(15, 15), edgecolor='white'));
+      
+</py-script>
+
+</body>
