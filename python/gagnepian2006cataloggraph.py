@@ -9,7 +9,8 @@ import numpy as np
 
 ## Latitudinal, Longitudinal Data
 
-df = pd.read_csv("gagnepian_2006_catalog.csv")
+url = 'https://github.com/Jane2210/selenes-compass/blob/main/index/gagnepian_2006_catalog.csv?raw=true'
+df = pd.read_csv(url, index_col=0)
 
 geometry = [Point(xy) for xy in zip(df['Long'], df['Lat'])]
 gdf = GeoDataFrame(df, geometry=geometry)   
