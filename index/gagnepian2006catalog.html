@@ -1,7 +1,8 @@
-<head>
-  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-  <script defer src ="https://pyscript.net/alpha/pyscript.js"></script>
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script>
+
+  <head>
+    <meta charset=UTF-8 />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
   
 </head>
 
@@ -51,7 +52,7 @@
         document.body.appendChild(renderer.domElement);
 
         let loader = new THREE.GLTFLoader();
-        loader.load('https://github.com/Jane2210/selenes-compass/blob/91b712fc03afa748508ff5d772836fe4906631fe/index/Gagnepian_2006_Catalog.gltf', function(gltf){
+        loader.load('https://github.com/Jane2210/selenes-compass/blob/59d1c22cdd6a6d59ff5a9472e01a4a8ce604b58c/index/Gagnepian_2006_Catalog.gltf', function(gltf){
           car = gltf.scene.children[0];
           car.scale.set(0.5,0.5,0.5);
           scene.add(gltf.scene);
