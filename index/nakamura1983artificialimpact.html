@@ -1,17 +1,26 @@
 <head>
-  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-  <script defer src ="https://pyscript.net/alpha/pyscript.js"></script
-  
+    
+  <meta charset=UTF-8 />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script type="text/javascript"> </script>
+
 </head>
+  
 
 <body>
-      <script src="three.min.js"></script>
-      <script src="GLTFLoader.js"></script>
-      <script src="OrbitControls.js"></script>
-      <script>
-      let scene, camera, renderer;
+	
+      <img src="https://github.com/Jane2210/selenes-compass/blob/7867cc6db23a54d03e16c39d3d31d8d2afebb60c/index/nakamura%201983.png" alt="graph">
 
-      function init() {
+      <script src="https://raw.githubusercontent.com/Jane2210/selenes-compass/main/index/three.module.js" type="module"> </script>
+        
+      <script>
+        import * as THREE from 'three';
+        import { OrbitControls } from 'https://raw.githubusercontent.com/Jane2210/selenes-compass/main/index/OrbitControls.js';
+        import { GLTFLoader } from 'https://raw.githubusercontent.com/Jane2210/selenes-compass/main/index/GLTFLoader.js';
+	      
+        let scene, camera, renderer;
+    
+        function init() {
 
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0xdddddd);
@@ -50,7 +59,7 @@
         document.body.appendChild(renderer.domElement);
 
         let loader = new THREE.GLTFLoader();
-        loader.load('Nakamura_1983_AI_Locations.gltf', function(gltf){
+        loader.load('https://github.com/Jane2210/selenes-compass/blob/7867cc6db23a54d03e16c39d3d31d8d2afebb60c/index/Nakamura_1983_AI_Locations.gltf', function(gltf){
           car = gltf.scene.children[0];
           car.scale.set(0.5,0.5,0.5);
           scene.add(gltf.scene);
@@ -64,31 +73,4 @@
       init();
     </script>
   
-<py-script>
-      
-      import sys; sys.path
-      import pandas as pd 
-      from shapely.geometry import Point
-      import geopandas as gpd
-      from geopandas import GeoDataFrame
-      import matplotlib.pyplot as plt
-      import plotly.express as px
-      import cv2
-      import numpy as np
-      
-      url = 'https://github.com/Jane2210/selenes-compass/blob/main/index/nakamura_1983_ai_locations.csv?raw=true'
-      
-      df = pd.read_csv(url, index_col=0)
-      df
-
-      geometry = [Point(xy) for xy in zip(df['Long'], df['Lat'])]
-      gdf = GeoDataFrame(df, geometry=geometry)   
-    
-      world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-
-
-      gdf.plot(marker='o', color='blue', markersize=50, ax=world.boundary.plot(figsize=(15, 15), edgecolor='white'));
-      
-</py-script>
-
 </body>
